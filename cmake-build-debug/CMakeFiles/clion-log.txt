@@ -1,0 +1,4 @@
+"/Users/yutaka/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/193.5662.56/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/yutaka/CLionProjects/astar_speed_planning
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/yutaka/CLionProjects/astar_speed_planning/cmake-build-debug
