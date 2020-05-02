@@ -17,7 +17,14 @@ make
 ```
 python script/visualize.py
 ```
-## 3. Reference
+
+## 3. Result
+- Black: Obstacle Occupied Area
+- Red:   Optimal Trajectory
+
+![result](./media/result.png)
+
+## 4. Reference
 - #### Paper
 [Hierarchical Trajectory Planning](https://www.researchgate.net/publication/322202031_Hierarchical_Trajectory_Planning_of_an_Autonomous_Car_Based_on_the_Integration_of_a_Sampling_and_an_Optimization_Method)
 

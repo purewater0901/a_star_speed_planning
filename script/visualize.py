@@ -20,4 +20,5 @@ if __name__ =='__main__':
     plt.xlabel('t[s]')
     plt.ylabel('s[m]')
     plt.title('A star Speed Planning')
+    plt.savefig('../media/result.png')
     plt.show()
