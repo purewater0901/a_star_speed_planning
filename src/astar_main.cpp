@@ -35,9 +35,8 @@ int main() {
     double weight_v = 1.0;
     double goal_s = 40.0;
     double t_max = 20.0;
-    double dt = 0.3;
+    double dt = 0.1;
     double a_max = 1.0;
-    //std::vector<double> da_list = {a_max, a_max/2.0, 0.0, -a_max/2.0, -a_max};
     std::vector<double> da_list = {a_max, 0.0, -a_max};
 
     //Obstacle information
@@ -53,8 +52,8 @@ int main() {
     Node start_node(0.0, 0.0, 0.0, goal_s);
     open_node_list.insert(&start_node);
 
-    std::chrono::system_clock::time_point  start, end; // 型は auto で可
-    start = std::chrono::system_clock::now(); // 計測開始時間
+    std::chrono::system_clock::time_point  start, end;
+    start = std::chrono::system_clock::now(); //start
     while(true)
     {
         if(open_node_list.empty())
