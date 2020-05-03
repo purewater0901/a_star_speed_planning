@@ -3,7 +3,7 @@
 #include <chrono>
 #include <cstring>
 #include <fstream>
-#include "node.h"
+#include "astar_node.h"
 #include "node_util.h"
 
 double calcSpeedLimit(const double s)
@@ -28,7 +28,7 @@ bool isOccupied(const double obs_s_min,
 
 int main() {
 
-    std::string filename = "../result.csv";
+    std::string filename = "../result_as.csv";
     std::ofstream writing_file;
     writing_file.open(filename, std::ios::out);
     writing_file << "s" << "," << "t" << std::endl;
@@ -46,10 +46,10 @@ int main() {
     double obs_s_max = 14.0;
 
     //node list
-    std::set<Node*> open_node_list;
-    std::set<Node*> closed_node_list;
+    std::set<AStarNode*> open_node_list;
+    std::set<AStarNode*> closed_node_list;
 
-    Node start_node(0.0, 0.0, 0.0, goal_s);
+    AStarNode start_node(0.0, 0.0, 0.0, goal_s);
     open_node_list.insert(&start_node);
 
     std::chrono::system_clock::time_point  start, end;
@@ -63,8 +63,8 @@ int main() {
         }
 
         //choose least cost node
-        Node* current_node = *open_node_list.begin();
-        for(Node* node : open_node_list)
+        AStarNode* current_node = *open_node_list.begin();
+        for(AStarNode* node : open_node_list)
             if(node->getScore() <= current_node->getScore())
                 current_node = node;
 
@@ -101,7 +101,7 @@ int main() {
             bool isCollide = isOccupied(obs_s_min, obs_s_max, obs_t_min, obs_t_max, new_s, new_t);
             if(-1e-6 < new_v && new_v<= calcSpeedLimit(new_s) && new_t <= t_max && !isCollide)
             {
-                Node* closed_node = NodeUtil::findNodeOnList(closed_node_list, new_s, new_t, new_v);
+                AStarNode* closed_node = NodeUtil::findNodeOnList(closed_node_list, new_s, new_t, new_v);
                 if(closed_node != nullptr)
                     continue;
 
@@ -110,11 +110,11 @@ int main() {
                 //double additional_cost = 0.5*std::pow((new_s - goal_s), 2);
                 double new_cost = current_node->actual_cost_ + additional_cost;
 
-                Node* successor = NodeUtil::findNodeOnList(open_node_list, new_s, new_t, new_v);
+                AStarNode* successor = NodeUtil::findNodeOnList(open_node_list, new_s, new_t, new_v);
                 if(successor==nullptr)
                 {
                     //We don't have this node in the open node list
-                    successor = new Node(new_s, new_t, new_v, goal_s, current_node);
+                    successor = new AStarNode(new_s, new_t, new_v, goal_s, current_node);
                     successor->actual_cost_ = new_cost;
                     open_node_list.insert(successor);
                 }

@@ -29,7 +29,7 @@ bool isOccupied(const double obs_s_min,
 int main(int argc, char** argv)
 {
     //Output File Information
-    std::string filename = "../result.csv";
+    std::string filename = "../result_has.csv";
     std::ofstream writing_file;
     writing_file.open(filename, std::ios::out);
     writing_file << "s" << "," << "t" << std::endl;
@@ -118,7 +118,7 @@ int main(int argc, char** argv)
             bool isCollide = isOccupied(obs_s_min, obs_s_max, obs_t_min, obs_t_max, new_s, new_t);
             if(-1e-6 < new_v && new_v<= calcSpeedLimit(new_s) && new_t <= t_max && !isCollide)
             {
-                HAStarNode* closed_node = HAStarNodeUtil::findNodeOnList(closed_node_list, new_s_d, new_t_d, new_v_d);
+                HAStarNode* closed_node = NodeUtil::findNodeOnList(closed_node_list, new_s_d, new_t_d, new_v_d);
                 if(closed_node != nullptr)
                     continue;
 
@@ -126,7 +126,7 @@ int main(int argc, char** argv)
                 double additional_cost = weight_v * std::pow((new_v - reference_v), 2);
                 double new_cost = current_node->actual_cost_ + additional_cost;
 
-                HAStarNode* successor = HAStarNodeUtil::findNodeOnList(open_node_list, new_s_d, new_t_d, new_v_d);
+                HAStarNode* successor = NodeUtil::findNodeOnList(open_node_list, new_s_d, new_t_d, new_v_d);
                 if(successor==nullptr)
                 {
                     //We don't have this node in the open node list
