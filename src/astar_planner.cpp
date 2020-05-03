@@ -1,49 +1,41 @@
-#include <iostream>
-#include <set>
-#include <chrono>
-#include <cstring>
-#include <fstream>
-#include "astar_node.h"
-#include "node_util.h"
+#include "astar_planner.h"
 
-double calcSpeedLimit(const double s)
+double AStarPlanner::calcSpeedLimit(const double s)
 {
     return 10.0;
 }
 
-double calcRefSpeed(const double s)
+double AStarPlanner::calcRefSpeed(const double s)
 {
     return 3.0;
 }
 
-bool isOccupied(const double obs_s_min,
-                const double obs_s_max,
-                const double obs_t_min,
-                const double obs_t_max,
-                double s,
-                double t)
+bool AStarPlanner::isOccupied(const double obs_s_min,
+                              const double obs_s_max,
+                              const double obs_t_min,
+                              const double obs_t_max,
+                              double s,
+                              double t)
 {
     return obs_s_min <= s && s <= obs_s_max && obs_t_min < t && t < obs_t_max;
 }
 
-int main() {
-
-    std::string filename = "../result_as.csv";
+void AStarPlanner::run(const double weight_v,
+                       const double a_max,
+                       const double t_max,
+                       const double dt,
+                       const double goal_s,
+                       const std::vector<double>& da_list,
+                       const double obs_t_min,
+                       const double obs_t_max,
+                       const double obs_s_min,
+                       const double obs_s_max,
+                       const std::string& filename)
+{
+    //file preparation
     std::ofstream writing_file;
     writing_file.open(filename, std::ios::out);
     writing_file << "s" << "," << "t" << std::endl;
-    double weight_v = 1.0;
-    double goal_s = 40.0;
-    double t_max = 20.0;
-    double dt = 0.1;
-    double a_max = 1.0;
-    std::vector<double> da_list = {a_max, 0.0, -a_max};
-
-    //Obstacle information
-    double obs_t_min = 4.0;
-    double obs_t_max = 10.0;
-    double obs_s_min = 10.0;
-    double obs_s_max = 14.0;
 
     //node list
     std::set<AStarNode*> open_node_list;
@@ -73,14 +65,14 @@ int main() {
         {
             end = std::chrono::system_clock::now();  // end time
             double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
-            std::cout << "Calculation Time: " << elapsed << std::endl;
+            std::cout << "A Star Planner Calculation Time: " << elapsed << std::endl;
 
             std::cout << "We reached the goal" << std::endl;
             while(current_node != nullptr)
             {
                 //std::cout << "s: " << current_node->s_ << std::endl;
                 //std::cout << "t: " << current_node->t_ << std::endl;
-                std::cout << "v: " << current_node->v_ << std::endl;
+                //std::cout << "v: " << current_node->v_ << std::endl;
                 writing_file << current_node->s_ << "," << current_node->t_ << std::endl;
 
                 current_node = current_node->parent_node_;
@@ -130,6 +122,4 @@ int main() {
             }
         }
     }
-
-    return 0;
 }
