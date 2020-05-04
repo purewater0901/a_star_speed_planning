@@ -15,7 +15,6 @@ public:
     HAStarPlanner() = default;
 
     void run(const double weight_v,
-             const double a_max,
              const double t_max,
              const double ds,
              const double dt,

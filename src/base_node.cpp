@@ -6,10 +6,10 @@ BaseNode::BaseNode(const double s,
                    const double goal_s)
                    : s_(s), t_(t), v_(v), actual_cost_(0.0)
 {
-    heuristic_cost_ = calcHeuristaicCost(goal_s);
+    heuristic_cost_ = calcHeuristicCost(goal_s);
 }
 
-double BaseNode::calcHeuristaicCost(const double goal_s)
+double BaseNode::calcHeuristicCost(const double goal_s)
 {
     return 10*std::pow(s_-goal_s, 2);
 }

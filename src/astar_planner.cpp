@@ -21,7 +21,6 @@ bool AStarPlanner::isOccupied(const double obs_s_min,
 }
 
 void AStarPlanner::run(const double weight_v,
-                       const double a_max,
                        const double t_max,
                        const double dt,
                        const double goal_s,
@@ -51,7 +50,7 @@ void AStarPlanner::run(const double weight_v,
         if(open_node_list.empty())
         {
             std::cout << "We cannot find a solution" << std::endl;
-            break;
+            return;
         }
 
         //choose least cost node
@@ -78,7 +77,7 @@ void AStarPlanner::run(const double weight_v,
                 current_node = current_node->parent_node_;
             }
 
-            break;
+            return;
         }
 
         closed_node_list.insert(current_node);
@@ -99,7 +98,6 @@ void AStarPlanner::run(const double weight_v,
 
                 double reference_v = calcRefSpeed(new_s);
                 double additional_cost = weight_v * std::pow((new_v - reference_v), 2);
-                //double additional_cost = 0.5*std::pow((new_s - goal_s), 2);
                 double new_cost = current_node->actual_cost_ + additional_cost;
 
                 AStarNode* successor = NodeUtil::findNodeOnList(open_node_list, new_s, new_t, new_v);
@@ -122,4 +120,6 @@ void AStarPlanner::run(const double weight_v,
             }
         }
     }
+
+    return;
 }

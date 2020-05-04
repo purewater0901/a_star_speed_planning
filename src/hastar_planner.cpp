@@ -21,7 +21,6 @@ bool HAStarPlanner::isOccupied(const double obs_s_min,
 }
 
 void HAStarPlanner::run(const double weight_v,
-                        const double a_max,
                         const double t_max,
                         const double ds,
                         const double dt,
@@ -132,7 +131,7 @@ void HAStarPlanner::run(const double weight_v,
                     successor->t_ = new_t;
                     successor->v_ = new_v;
                     successor->actual_cost_ = new_cost;
-                    successor->heuristic_cost_ = successor->calcHeuristaicCost(goal_s);
+                    successor->heuristic_cost_ = successor->calcHeuristicCost(goal_s);
                     successor->parent_node_ = current_node;
                 }
             }

@@ -30,10 +30,10 @@ int main(int argc, char** argv)
     double obs_s_max = 14.0;
 
     AStarPlanner astar_planner;
-    astar_planner.run(weight_v, a_max, t_max, dt, goal_s, da_list, obs_t_min, obs_t_max, obs_s_min, obs_s_max, astar_filename);
+    astar_planner.run(weight_v, t_max, dt, goal_s, da_list, obs_t_min, obs_t_max, obs_s_min, obs_s_max, astar_filename);
 
     HAStarPlanner hastar_planner;
-    hastar_planner.run(weight_v, a_max, t_max, ds, dt, dv, goal_s, da_list, obs_t_min, obs_t_max, obs_s_min, obs_s_max, hastar_filename);
+    hastar_planner.run(weight_v, t_max, ds, dt, dv, goal_s, da_list, obs_t_min, obs_t_max, obs_s_min, obs_s_max, hastar_filename);
 
     return 0;
 }

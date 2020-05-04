@@ -14,7 +14,7 @@ public:
              const double goal_s);
 
     double getScore() { return actual_cost_+heuristic_cost_; }
-    double calcHeuristaicCost(const double goal_s);
+    double calcHeuristicCost(const double goal_s);
     bool isGoal(const double goal_s);
 
     double s_;
