@@ -90,7 +90,7 @@ void HAStarPlanner::run(const double weight_v,
 
         //insert current node into closed node list and erase current node from open node list
         closed_node_list.insert(current_node);
-        open_node_list.erase(std::find(open_node_list.begin(), open_node_list.end(), current_node));
+        open_node_list.erase(open_node_list.find(current_node));
 
         //update neighbors
         for(double a_command : da_list)

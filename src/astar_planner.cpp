@@ -81,7 +81,7 @@ void AStarPlanner::run(const double weight_v,
         }
 
         closed_node_list.insert(current_node);
-        open_node_list.erase(std::find(open_node_list.begin(), open_node_list.end(), current_node));
+        open_node_list.erase(open_node_list.find(current_node));
 
         for(double da : da_list)
         {
